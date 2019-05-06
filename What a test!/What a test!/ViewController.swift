@@ -14,4 +14,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    @IBOutlet weak var label: UILabel!
+    @IBAction func press(_ sender: Any) {
+        let operationsClass = operations()
+        label.text = operationsClass.getID()
+    }
 }
