@@ -15,6 +15,7 @@
 		E670B116227B2F5400837B7B /* What_a_test_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670B115227B2F5400837B7B /* What_a_test_Tests.swift */; };
 		E670B121227B2F5400837B7B /* What_a_test_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670B120227B2F5400837B7B /* What_a_test_UITests.swift */; };
 		E670B12F227B2FD800837B7B /* operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670B12E227B2FD800837B7B /* operator.swift */; };
+		E68F5ED8227EF3D4003467D4 /* operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68F5ED7227EF3D4003467D4 /* operations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		E670B120227B2F5400837B7B /* What_a_test_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What_a_test_UITests.swift; sourceTree = "<group>"; };
 		E670B122227B2F5400837B7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E670B12E227B2FD800837B7B /* operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operator.swift; sourceTree = "<group>"; };
+		E68F5ED7227EF3D4003467D4 /* operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				E670B100227B2F5200837B7B /* AppDelegate.swift */,
 				E670B102227B2F5200837B7B /* ViewController.swift */,
 				E670B104227B2F5200837B7B /* Main.storyboard */,
+				E68F5ED7227EF3D4003467D4 /* operations.swift */,
 				E670B107227B2F5400837B7B /* Assets.xcassets */,
 				E670B109227B2F5400837B7B /* LaunchScreen.storyboard */,
 				E670B10C227B2F5400837B7B /* Info.plist */,
@@ -262,6 +265,7 @@
 				E670B12F227B2FD800837B7B /* operator.swift in Sources */,
 				E670B103227B2F5200837B7B /* ViewController.swift in Sources */,
 				E670B101227B2F5200837B7B /* AppDelegate.swift in Sources */,
+				E68F5ED8227EF3D4003467D4 /* operations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
