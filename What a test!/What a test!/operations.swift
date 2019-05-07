@@ -131,12 +131,15 @@ class operations {
             guard let data = data else { return }
             
             do {
+                
                 let recordVar = try JSONDecoder().decode(Records.self, from: data)
                 
                 DispatchQueue.main.async {
                     outRecordMethod(recordVar)
                     print(recordVar.myName)
+                    
                 }
+                
             } catch let jsnErr {
                 print("errore durante la deserializzazione del JSON: ", jsnErr)
             }
