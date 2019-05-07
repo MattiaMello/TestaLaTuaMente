@@ -19,5 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     @IBAction func press(_ sender: Any) {
         label.text = operationClass.ID
+        operationClass.getRecord()
+        print("premuto")
+        print(operationClass.record.myName)
     }
 }

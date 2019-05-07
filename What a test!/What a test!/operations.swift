@@ -71,6 +71,7 @@ struct Identification : Decodable{
 class operations {
     
     var ID = "AAAAAAAAAA"
+    var record = Records()
     
     //operazioni:
     
@@ -83,7 +84,9 @@ class operations {
         if(ID == "ZZZZZZZZZZ"){
             ID = "IDDALWEBSERVICE"//qua metodo che scarica un ID
             self.getID(outIDmethod: { (phid) in
-                self.ID = phid })
+                self.ID = phid
+                UserDefaults.standard.setValue(phid, forKey: "ID")
+            })
         }
     }
     
@@ -112,30 +115,32 @@ class operations {
     
     //-------------------------------------------------
     
-    func getRecord() -> Records {
+    func getRecord() {
+        self.downloadRecord(outRecordMethod: { (varRecord) in
+            self.record = varRecord
+        })
+    }
+    
+    private func downloadRecord(outRecordMethod:@escaping (Records) -> ()) {
         let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=GR&phid="+ID+"&Record=&NomeG=&TipoP=&DurataP="
+        
         let url = URL(string: jsonURL)!
-        var outRecord = Records()
         
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             
             guard let data = data else { return }
             
             do {
+                let recordVar = try JSONDecoder().decode(Records.self, from: data)
                 
-                let inRecord = try JSONDecoder().decode(Records.self, from: data)
                 DispatchQueue.main.async {
-                    outRecord = inRecord
+                    outRecordMethod(recordVar)
+                    print(recordVar.myName)
                 }
-                
             } catch let jsnErr {
-                
                 print("errore durante la deserializzazione del JSON: ", jsnErr)
-                
             }
             
         }.resume()
-        
-        return outRecord
     }
 }
