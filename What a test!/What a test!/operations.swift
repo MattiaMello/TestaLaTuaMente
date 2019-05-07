@@ -63,6 +63,9 @@ struct Records : Decodable {
 
 struct Identification : Decodable{
     let ID : String
+    init() {
+        ID = "BBBBBBBBBB"
+    }
 }
 
 class operations {
@@ -79,13 +82,15 @@ class operations {
         ID = UserDefaults.standard.value(forKey: "ID") as? String ?? "ZZZZZZZZZZ"
         if(ID == "ZZZZZZZZZZ"){
             ID = "IDDALWEBSERVICE"//qua metodo che scarica un ID
+            self.getID(outIDmethod: { (phid) in
+                self.ID = phid })
         }
     }
     
-    func getID() -> String {
+    func getID(outIDmethod:@escaping (String) -> ()) {
         let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=GID&phid=&Record=&NomeG=&TipoP=&DurataP="
+        
         let url = URL(string: jsonURL)!
-        var outID = "ZZZZZZZZZZ"
         
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             
@@ -93,17 +98,19 @@ class operations {
             
             do {
                 let inID = try JSONDecoder().decode(Identification.self, from: data)
+                
                 DispatchQueue.main.async {
-                    outID = inID.ID
+                    outIDmethod(inID.ID)
+                    print(inID.ID)
                 }
             } catch let jsnErr {
                 print("errore durante la deserializzazione del JSON: ", jsnErr)
             }
             
         }.resume()
-        
-        return outID
     }
+    
+    //-------------------------------------------------
     
     func getRecord() -> Records {
         let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=GR&phid="+ID+"&Record=&NomeG=&TipoP=&DurataP="

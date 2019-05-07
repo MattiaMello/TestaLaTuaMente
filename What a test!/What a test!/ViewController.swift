@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let operationClass = operations()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +18,6 @@ class ViewController: UIViewController {
     }
     @IBOutlet weak var label: UILabel!
     @IBAction func press(_ sender: Any) {
-        let operationsClass = operations()
-        label.text = operationsClass.getID()
+        label.text = operationClass.ID
     }
 }
