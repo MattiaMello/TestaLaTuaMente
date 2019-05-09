@@ -10,5 +10,9 @@ import Foundation
 
 
 class game {
-    
+    public var modalita : String
+    var record = 0
+    init() {
+        modalita = "Lettere"
+    }
 }
