@@ -88,6 +88,7 @@ class operations {
                 UserDefaults.standard.setValue(phid, forKey: "ID")
             })
         }
+        getRecord()
     }
     
     func getID(outIDmethod:@escaping (String) -> ()) {
@@ -122,6 +123,7 @@ class operations {
     }
     
     private func downloadRecord(outRecordMethod:@escaping (Records) -> ()) {
+        
         let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=GR&phid="+ID+"&Record=&NomeG=&TipoP=&DurataP="
         
         let url = URL(string: jsonURL)!
@@ -136,8 +138,8 @@ class operations {
                 
                 DispatchQueue.main.async {
                     outRecordMethod(recordVar)
+                    print("Entrato")
                     print(recordVar.myName)
-                    
                 }
                 
             } catch let jsnErr {

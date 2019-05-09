@@ -17,4 +17,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     @IBOutlet weak var GameModePicker: UIPickerView!
+    @IBAction func start(_ sender: Any) {
+        print(operationClass.record.myName)
+    }
 }
