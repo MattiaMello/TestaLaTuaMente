@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E659E3232285789B00C2364A /* GameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E659E3222285789B00C2364A /* GameResultViewController.swift */; };
 		E670B101227B2F5200837B7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670B100227B2F5200837B7B /* AppDelegate.swift */; };
 		E670B103227B2F5200837B7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670B102227B2F5200837B7B /* ViewController.swift */; };
 		E670B106227B2F5200837B7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E670B104227B2F5200837B7B /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E659E3222285789B00C2364A /* GameResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResultViewController.swift; sourceTree = "<group>"; };
 		E670B0FD227B2F5200837B7B /* What a test!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What a test!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E670B100227B2F5200837B7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E670B102227B2F5200837B7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				E68F5ED7227EF3D4003467D4 /* operations.swift */,
 				E6E36D902281900B00319C00 /* game.swift */,
 				E6E1D20B228471BB00253552 /* gameViewController.swift */,
+				E659E3222285789B00C2364A /* GameResultViewController.swift */,
 				E670B104227B2F5200837B7B /* Main.storyboard */,
 				E670B107227B2F5400837B7B /* Assets.xcassets */,
 				E670B109227B2F5400837B7B /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 				E68F5ED8227EF3D4003467D4 /* operations.swift in Sources */,
 				E6E1D20C228471BB00253552 /* gameViewController.swift in Sources */,
 				E6E36D912281900B00319C00 /* game.swift in Sources */,
+				E659E3232285789B00C2364A /* GameResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

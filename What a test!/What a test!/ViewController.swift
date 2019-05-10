@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     private let pwDataSource = ["Lettere", "Numeri"]
     
     let operationClass = operations()
-    let gameController = game()
+    let gameController = game.self
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return pwDataSource.count
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        gameController.modalita = pwDataSource[row]
+        gameController.shared.modalita = pwDataSource[row]
         print(pwDataSource[row])
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
