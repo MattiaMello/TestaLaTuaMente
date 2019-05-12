@@ -22,7 +22,17 @@ class ViewController: UIViewController {
         GameModePicker.delegate = self
     }
     @IBOutlet weak var GameModePicker: UIPickerView!
+    @IBOutlet weak var playerName: UITextField!
     @IBAction func start(_ sender: Any) {
+        if(playerName.text != "") {
+            gameController.shared.nomePlayer = playerName.text ?? "Anonimo"
+            let nextScreen  = gameViewController()
+            self.navigationController?.pushViewController(nextScreen, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Hai inserito il nome?", message: "Controlla bene...", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
 }
 

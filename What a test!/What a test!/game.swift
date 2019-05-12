@@ -11,9 +11,14 @@ import Foundation
 
 class game {
     public var modalita : String
-    var record = 0
+    public var record : Int
+    public var tempo : Int
+    public var nomePlayer : String
     private init() {
         modalita = "Lettere"
+        record = 0
+        tempo = 0
+        nomePlayer = "Anonimo"
     }
     static let shared = game()
 }

@@ -85,6 +85,7 @@ class operations {
             ID = "IDDALWEBSERVICE"//qua metodo che scarica un ID
             self.getID(outIDmethod: { (phid) in
                 self.ID = phid
+                game.shared.nomePlayer = self.ID
                 UserDefaults.standard.setValue(phid, forKey: "ID")
             })
         }
