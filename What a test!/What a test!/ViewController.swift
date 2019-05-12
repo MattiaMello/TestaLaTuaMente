@@ -11,27 +11,39 @@ import UIKit
 class ViewController: UIViewController {
     
     private let pwDataSource = ["Lettere", "Numeri"]
-    
-    let operationClass = operations()
+    let operationClass = operations.self
     let gameController = game.self
-
+    
+    @IBOutlet weak var GameModePicker: UIPickerView!
+    @IBOutlet weak var playerName: UITextField!
+    @IBOutlet weak var playButton: UIButton!
+    @IBAction func playPressed(_ sender: Any) {
+        game.shared.nomePlayer = playerName.text ?? "anonimo"
+    }
+    @IBAction func proerlyFormattedName(_ sender: Any) {
+        if(playerName.text != "") {
+            playButton.isEnabled = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         GameModePicker.dataSource = self
         GameModePicker.delegate = self
+        playButton.isEnabled = false
+        var timer = Timer()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerTrigger), userInfo: nil, repeats: true)
     }
-    @IBOutlet weak var GameModePicker: UIPickerView!
-    @IBOutlet weak var playerName: UITextField!
-    @IBAction func start(_ sender: Any) {
+    
+    @objc func timerTrigger() {
+        if(operations.shared.record.myName != "Anonimo")
+        {
+            playerName.text = operations.shared.record.myName
+        }
         if(playerName.text != "") {
-            gameController.shared.nomePlayer = playerName.text ?? "Anonimo"
-            let nextScreen  = gameViewController()
-            self.navigationController?.pushViewController(nextScreen, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Hai inserito il nome?", message: "Controlla bene...", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            playButton.isEnabled = true
         }
     }
 }

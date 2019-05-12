@@ -19,13 +19,23 @@ class gameViewController: UIViewController {
     var daMostrare = "niente"
     var parziale = "nonparziale"
     var timer = Timer()
+    var nascosto = false
     
+    @IBOutlet weak var lblSecondi: UILabel!
+    @IBOutlet weak var lblClassifica: UILabel!
+    @IBOutlet weak var lblTiMancano: UILabel!
+    @IBOutlet weak var sequence2lbl: UILabel!
     @IBOutlet weak var Sequence: UILabel!
     @IBOutlet weak var UIInput: UITextField!
     @IBOutlet weak var SecondsLeft: UILabel!
+    @IBOutlet weak var btnClassifica: UIButton!
+    @IBAction func gotoClassifica(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lblClassifica.isHidden = true
+        btnClassifica.isHidden = true
         switch game.shared.modalita {
         case "Lettere":
             self.modalita = "L"
@@ -79,9 +89,11 @@ class gameViewController: UIViewController {
                 mostra(stringa: parziale)
             } else {
                 UIInput.isHidden = false
+                nascosto = false
                 Sequence.isHidden = true
                 SecondsLeft.text = "5"
                 inserimento = true
+                UIInput.text = ""
                 showCounter = 0
             }
         } else {
@@ -90,17 +102,30 @@ class gameViewController: UIViewController {
                     inserimento = false
                     writeCounter = 0
                     contaTurni += 1
+                    UIInput.text = ""
                     UIInput.isHidden = true
                     Sequence.isHidden = false
                     SecondsLeft.text = "2"
                 } else {
-                    //timer.stop()
+                    timer.invalidate()
+                    UIInput.isHidden = true
+                    Sequence.isHidden = true
                     game.shared.record = contaTurni
                     game.shared.tempo = counter
-                    let nextScreen  = GameResultViewController()
-                    self.navigationController?.pushViewController(nextScreen, animated: true)
+                    lblTiMancano.isHidden = true
+                    lblSecondi.isHidden = true
+                    SecondsLeft.isHidden = true
+                    btnClassifica.isHidden = false
+                    lblClassifica.isHidden = false
+                    sequence2lbl.isHidden = true
+                    operations.shared.setRecord(record: contaTurni, durataP: counter, tipoP: game.shared.modalita)
+                    lblClassifica.text = "Hai totalizzato " + String(contaTurni) + " punti in " + String(counter - 2/*si lo so*/) + " secondi."
                 }
             } else {
+                if(!nascosto) {
+                    UIInput.text = ""
+                    nascosto = true
+                }
                 UIInput.isHidden = false
                 Sequence.isHidden = true
                 writeCounter += 1
@@ -116,7 +141,7 @@ class gameViewController: UIViewController {
     
     func inserisci() -> Bool { //verifica la correttezza della stringa inserita
         var inserimento = UIInput.text ?? "empty"
-        if(daMostrare.contains(inserimento.uppercased())){
+        if(daMostrare.contains(inserimento.uppercased()) && inserimento.count == contaTurni + 1){
             return true
         }
         return false

@@ -59,6 +59,33 @@ struct Records : Decodable {
         othRecord9 = -1
         othName9 = "Anonimo"
     }
+    var dictionary: [String: Any] {
+        return ["myRecord": myRecord,
+                "myName": myName,
+                "othRecord0": othRecord0,
+                "othName0": othName0,
+                "othRecord1": othRecord1,
+                "othName1": othName1,
+                "othRecord2": othRecord2,
+                "othName2": othName2,
+                "othRecord3": othRecord3,
+                "othName3": othName3,
+                "othRecord4": othRecord4,
+                "othName4": othName4,
+                "othRecord5": othRecord5,
+                "othName5": othName5,
+                "othRecord6": othRecord6,
+                "othName6": othName6,
+                "othRecord7": othRecord7,
+                "othName7": othName7,
+                "othRecord8": othRecord8,
+                "othName08": othName8,
+                "othRecord9": othRecord9,
+                "othName09": othName9,]
+    }
+    var nsDictionary: NSDictionary {
+        return dictionary as NSDictionary
+    }
 }
 
 struct Identification : Decodable{
@@ -70,8 +97,8 @@ struct Identification : Decodable{
 
 class operations {
     
-    var ID = "AAAAAAAAAA"
-    var record = Records()
+    public var ID = "AAAAAAAAAA"
+    public var record = Records()
     
     //operazioni:
     
@@ -79,7 +106,7 @@ class operations {
     //scarica i record
     //setta il record (se maggiore di quello effettuato)
     
-    init() {
+    private init() {
         ID = UserDefaults.standard.value(forKey: "ID") as? String ?? "ZZZZZZZZZZ"
         if(ID == "ZZZZZZZZZZ"){
             ID = "IDDALWEBSERVICE"//qua metodo che scarica un ID
@@ -90,6 +117,28 @@ class operations {
             })
         }
         getRecord()
+    }
+    
+    static let shared = operations()
+    
+    public func setRecord(record: Int, durataP: Int, tipoP: String) {
+        var tipo = "L"
+        switch tipoP {
+        case "Lettere":
+            tipo = "L"
+            break
+        case "Numeri":
+            tipo = "N"
+            break
+        default:
+            tipo = "NaN"
+        }
+        let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=SR&phid=" + ID + "&Record=" + String(record) + "&NomeG=&TipoP=" + tipo + "&DurataP=" + String(durataP)
+        
+        let url = URL(string: jsonURL)!
+        
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            }.resume()
     }
     
     func getID(outIDmethod:@escaping (String) -> ()) {
