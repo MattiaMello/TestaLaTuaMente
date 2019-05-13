@@ -17,7 +17,7 @@ class GameResultViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (resultDict.count)
+        return (resultDict.count/2)
     }
     
     @available(iOS 2.0, *)
@@ -32,17 +32,17 @@ class GameResultViewController: UIViewController, UITableViewDelegate, UITableVi
         
         switch cheDevoFare {
         case "my":
-            cell.textLabel?.text = unificaMy(a: resultDict["myRecord"] as! String, b: resultDict["myName"] as! String)
+            cell.textLabel?.text = unificaMy(a: resultDict["myRecord"] as? Int ?? -1, b: resultDict["myName"] as? String ?? "Err")
         case "oth":
+            let dict = resultDict
+            cell.textLabel?.text = unificaMy(a: resultDict[String("othRecord" + String(indexPath.row-1))] as? Int ?? -1, b: resultDict[String("othName" + String(indexPath.row-1))] as? String ?? "Err")
             break
-        default:
-            cell.textLabel?.text = unificaMy(a: resultDict["othRecord" + String(indexPath.row)] as! String, b: resultDict["othName" + String(indexPath.row)] as! String)
+        default: break
         }
-        
         return cell
     }
     
-    func unificaMy(a: String, b:String) -> String {
-        return b + " ha totalizzato " + a + " punti."
+    func unificaMy(a: Int, b:String) -> String {
+        return b + " ha totalizzato " + String(a) + " punti."
     }
 }
