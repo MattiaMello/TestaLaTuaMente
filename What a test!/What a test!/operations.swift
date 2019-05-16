@@ -141,6 +141,18 @@ class operations {
             }.resume()
     }
     
+    public func updateName(name: String) {
+        //da fare da fare da fare da fare
+        //UPDNM http://testalatuamente.altervista.org/API/operations.php?action=UPDNM&phid=&Record=&NomeG=&TipoP=&DurataP=
+        
+        let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=UPDNM&phid=" + ID + "&Record=&NomeG=" + name + "&TipoP=&DurataP="
+        
+        let url = URL(string: jsonURL)!
+        
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            }.resume()
+    }
+    
     func getID(outIDmethod:@escaping (String) -> ()) {
         let jsonURL = "http://testalatuamente.altervista.org/API/operations.php?action=GID&phid=&Record=&NomeG=&TipoP=&DurataP="
         
@@ -156,6 +168,7 @@ class operations {
                 DispatchQueue.main.async {
                     outIDmethod(inID.ID)
                     print(inID.ID)
+                    self.ID = inID.ID
                 }
             } catch let jsnErr {
                 print("errore durante la deserializzazione del JSON: ", jsnErr)

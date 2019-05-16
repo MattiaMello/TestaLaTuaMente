@@ -29,7 +29,26 @@ class gameViewController: UIViewController {
     @IBOutlet weak var UIInput: UITextField!
     @IBOutlet weak var SecondsLeft: UILabel!
     @IBOutlet weak var btnClassifica: UIButton!
+    
     @IBAction func gotoClassifica(_ sender: Any) {
+        varResetter()
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        varResetter()
+    }
+    
+    func varResetter () {
+        modalita = "L"
+        counter = 0
+        showCounter = 0
+        writeCounter = 0
+        inserimento = false
+        contaTurni = 0
+        daMostrare = "niente"
+        parziale = "nonparziale"
+        timer = Timer()
+        nascosto = false
     }
     
     override func viewDidLoad() {
@@ -139,7 +158,9 @@ class gameViewController: UIViewController {
         Sequence.text = stringa
     }
     
-    func inserisci() -> Bool { //verifica la correttezza della stringa inserita
+    //verifica la correttezza della stringa inserita
+    
+    func inserisci() -> Bool {
         var inserimento = UIInput.text ?? "empty"
         if(daMostrare.contains(inserimento.uppercased()) && inserimento.count == contaTurni + 1){
             return true

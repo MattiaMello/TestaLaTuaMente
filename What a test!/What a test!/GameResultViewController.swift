@@ -23,8 +23,6 @@ class GameResultViewController: UIViewController, UITableViewDelegate, UITableVi
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        /*return ["myRecord": myRecord,
-         "myName": myName*/
         var cheDevoFare = "my"
         if(indexPath.row > 0) {
             cheDevoFare = "oth"

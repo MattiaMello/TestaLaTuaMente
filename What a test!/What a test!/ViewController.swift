@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     private let pwDataSource = ["Lettere", "Numeri"]
     let operationClass = operations.self
@@ -18,16 +18,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerName: UITextField!
     @IBOutlet weak var playButton: UIButton!
     @IBAction func playPressed(_ sender: Any) {
-        game.shared.nomePlayer = playerName.text ?? "anonimo"
+        game.shared.nomePlayer = playerName.text ?? "Anonimo"
+        operationClass.shared.updateName(name: playerName.text!)
     }
     @IBAction func proerlyFormattedName(_ sender: Any) {
-        if(playerName.text != "") {
+        if(playerName.text != "" && game.shared.nomePlayer != "") {
             playButton.isEnabled = true
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (game.shared.nomePlayer != "" && game.shared.nomePlayer != "Anonimo") {
+            playerName.text = game.shared.nomePlayer
+        }
+        
+        playerName.delegate = self as! UITextFieldDelegate
         
         // Do any additional setup after loading the view, typically from a nib.
         GameModePicker.dataSource = self
@@ -37,10 +44,16 @@ class ViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerTrigger), userInfo: nil, repeats: true)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     @objc func timerTrigger() {
-        if(operations.shared.record.myName != "Anonimo")
+        if(operations.shared.record.myName != "Anonimo" && operations.shared.record.myName != "")
         {
             playerName.text = operations.shared.record.myName
+            playerName.isEnabled = false
         }
         if(playerName.text != "") {
             playButton.isEnabled = true
